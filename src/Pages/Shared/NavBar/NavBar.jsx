@@ -27,11 +27,11 @@ const NavBar = () => {
     }, []);
 
     const navOption = <>
-        <li><NavLink className={"px-2"} to={'/'}>Home</NavLink></li>
-        <li><NavLink className={"px-2"} to={'addArticle'}>Add Articles</NavLink></li>
-        <li><NavLink className={"px-2"} to={'allArticle'}> All Articles</NavLink></li>
-        <li><NavLink className={"px-2"} to={'subscription'}>Subscription</NavLink></li>
-        <li><NavLink className={"px-2"} to={'Dashboard'}>Dashboard</NavLink></li>
+        <li><NavLink to={'/'}>Home</NavLink></li>
+        <li><NavLink to={'addArticle'}>Add Articles</NavLink></li>
+        <li><NavLink to={'allArticle'}> All Articles</NavLink></li>
+        <li><NavLink to={'subscription'}>Subscription</NavLink></li>
+        <li><NavLink to={'Dashboard'}>Dashboard</NavLink></li>
     </>
 
 
@@ -61,7 +61,7 @@ const NavBar = () => {
                     </div>
                 </div>
                 <div className="navbar-center flex flex-col  max-[550px]:items-start space-y-2">
-                    <Link to={'/'} className=" max-[360px]:text-4xl text-5xl font-bold text-[#0061ff] gradient-text tracking-widest "> Daily Pluse</Link>
+                    <Link to={'/'} className=" max-[360px]:text-4xl text-5xl font-bold text-[#0061ff] gradient-text tracking-widest playfair  "> Daily Pluse</Link>
                     <h1 className="font-semibold pl-1">{month} {date}, {year} </h1>
                 </div>
                 <div className="navbar-end">
@@ -71,10 +71,9 @@ const NavBar = () => {
                                 <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
                             </div>
                         </div>
-                        <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[100000] p-2 shadow bg-base-300 border-2 text-lg border-[#3B82F6] text-white rounded-box w-52">
-
-                            <li><a>Dashboard</a></li>
-                            <li><a>Logout</a></li>
+                        <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-black  border-2 py-5">
+                            <li><p className="text-xl font-semibold">Dashboard</p></li>
+                            <li><p className="text-xl font-semibold">Logout</p></li>
                         </ul>
                     </div>
                 </div>
@@ -88,8 +87,15 @@ const NavBar = () => {
                     <div tabIndex={0} role="button" className="btn btn-ghost border-2 ">
                         <RiMenu2Fill className="text-3xl" />
                     </div>
-                    <ul tabIndex={0} className="menu menu-sm text-black dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                        {navOption}
+                    <ul tabIndex={0} className="menu menu-lg dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                        <li>
+                            <a className="justify-between">
+                                Profile
+                                <span className="badge">New</span>
+                            </a>
+                        </li>
+                        <li className=""><a>Settings</a></li>
+                        <li><a>Logout</a></li>
                     </ul>
                 </div>
                 {/* clock*/}

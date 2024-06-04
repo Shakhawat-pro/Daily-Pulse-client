@@ -2,7 +2,6 @@
     background: linear-gradient(to right, #0061ff 0%, #e81cff 80%); 
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    /* color: goldenrod;  */
 }
 .bg-gradient{
     background: linear-gradient(to right, #1e59fc, #e81cff 100%);
@@ -12,6 +11,7 @@ a:hover{
 }
 a.active{
     /* color: #EAFF00;   */
-    border-bottom: 2px solid white;   
+    border-bottom: 2px solid #EAFF00;   
+    padding: 0 7px 0;
     
 }
