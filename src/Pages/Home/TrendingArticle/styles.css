@@ -80,6 +80,25 @@ body {
       rgba(174, 63, 255, 1) 100%);
 }
 
+.number-slide1:hover{
+  border: 3px solid rgb(64, 175, 255);
+}
+.number-slide2:hover{
+  border: 3px solid rgb(255, 75, 64);
+}
+.number-slide3:hover{
+  border: 3px solid rgb(182, 255, 64);
+}
+.number-slide4:hover{
+  border: 3px solid rgb(64, 255, 242);
+}
+.number-slide5:hover{
+  border: 3px solid rgb(255, 64, 156);
+}
+.number-slide6:hover{
+  border: 3px solid rgb(64, 76, 255);
+}
+
 
 .arrow {
   width: 30px;

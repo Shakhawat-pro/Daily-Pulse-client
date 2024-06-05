@@ -61,7 +61,7 @@ const NavBar = () => {
                     </div>
                 </div>
                 <div className="navbar-center flex flex-col  max-[550px]:items-start space-y-2">
-                    <Link to={'/'} className=" max-[360px]:text-4xl text-5xl font-bold text-[#0061ff] gradient-text tracking-widest playfair  "> Daily Pluse</Link>
+                    <Link to={'/'} className=" max-[360px]:text-4xl text-5xl font-bold text-[#0061ff] gradient-text tracking-widest playfair font-serif "> Daily Pulse</Link>
                     <h1 className="font-semibold pl-1">{month} {date}, {year} </h1>
                 </div>
                 <div className="navbar-end">

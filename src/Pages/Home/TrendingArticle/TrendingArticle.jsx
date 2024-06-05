@@ -76,7 +76,7 @@ const TrendingArticle = () => {
                 <div ref={sliderRef} className="keen-slider">
                     {
                         articles.slice(0, 6).map((article, index) => (
-                            <div key={article._id} className={`relative keen-slider__slide number-slide${index + 1}`}>
+                            <div key={article._id} className={` relative keen-slider__slide number-slide${index + 1}`}>
                                 <img className="h-full object-cover " src={article.image} alt="" />
                                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black " style={{ paddingTop: '300px' }}></div>
                                 <div className="absolute p-5 space-y-3">

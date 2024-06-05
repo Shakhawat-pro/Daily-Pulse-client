@@ -14,7 +14,7 @@ const Home = () => {
     return (
         <div className="max-w-screen-xl w-11/12 mx-auto">
             <Helmet>
-                <title>DailyPluse | Home</title>
+                <title>DailyPulse | Home</title>
             </Helmet>
             <TrendingArticle></TrendingArticle>
         </div>
