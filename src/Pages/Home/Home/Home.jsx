@@ -1,5 +1,6 @@
 // import useArticles from "../../../hooks/useArticles";
 
+import { Helmet } from "react-helmet-async";
 import TrendingArticle from "../TrendingArticle/TrendingArticle";
 
 
@@ -11,8 +12,11 @@ const Home = () => {
 
 
     return (
-        <div className="w-11/12 mx-auto">
-            <TrendingArticle></TrendingArticle>            
+        <div className="max-w-screen-xl w-11/12 mx-auto">
+            <Helmet>
+                <title>DailyPluse | Home</title>
+            </Helmet>
+            <TrendingArticle></TrendingArticle>
         </div>
     );
 };
