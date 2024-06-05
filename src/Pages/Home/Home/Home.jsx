@@ -1,15 +1,18 @@
+// import useArticles from "../../../hooks/useArticles";
+
+import TrendingArticle from "../TrendingArticle/TrendingArticle";
 
 
 
 
 const Home = () => {
-
-  
+    // const articles = useArticles()  
+    // // console.log(articles);
 
 
     return (
-        <div className="text-4xl">
-            <h1>This is Home</h1>
+        <div className="w-11/12 mx-auto">
+            <TrendingArticle></TrendingArticle>            
         </div>
     );
 };
