@@ -1,9 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import './nav.css'
 import { RiMenu2Fill } from "react-icons/ri";
+import { AuthContext } from "../../../Context/AuthProvider";
 
 const NavBar = () => {
+    const { user, logOut } = useContext(AuthContext)
+    // console.log(user);
     const [time, setTime] = useState(new Date());
     const [hours, setHours] = useState(time.getHours());
     const [minutes, setMinutes] = useState(time.getMinutes());
@@ -61,24 +64,31 @@ const NavBar = () => {
                     </div>
                 </div>
                 <div className="navbar-center flex flex-col  max-[550px]:items-start space-y-2">
-                    <Link to={'/'} className=" max-[360px]:text-4xl text-5xl font-bold text-[#0061ff] gradient-text tracking-widest playfair font-serif "> Daily Pulse</Link>
+                    <Link to={'/'} className=" max-[410px]:text-4xl text-5xl font-bold text-[#0061ff] gradient-text tracking-widest playfair font-serif "> Daily Pulse</Link>
                     <h1 className="font-semibold pl-1">{month} {date}, {year} </h1>
                 </div>
                 <div className="navbar-end">
-                    <div className="dropdown dropdown-end cursor-pointer">
-                        <div tabIndex={0} role="button" className="avatar border-4 rounded-full border-[#3B82F6]">
-                            <div className="w-14 min-[350px]:w-16 rounded-full">
-                                <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                    {
+                        user ?
+                            <div className="dropdown dropdown-end cursor-pointer">
+                                <div tabIndex={0} role="button" className="avatar border-2 rounded-full border-[#3B82F6]">
+                                    <div className="w-14 min-[350px]:w-16 rounded-full">
+                                        <img src={user?.photoURL} />
+                                    </div>
+                                </div>
+                                <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-black  border-2 py-5">
+                                    <li><p className="text-xl font-semibold">Profile</p></li>
+                                    <li onClick={logOut}><p className="text-xl font-semibold">Logout</p></li>
+                                </ul>
+                            </div> :
+                            <div className=" max-[550px]:hidden  gap-2 flex flex-col sm:flex-row">
+                                <Link to={'/login'} className="btn w-20 bg-transparent border-2 border-black hover:bg-transparent hover:border-[#3B82F6] hover:text-[#3B82F6]">Login</Link>
+                                <Link to={'/register'} className="btn w-20 bg-transparent border-2 border-black hover:bg-transparent hover:border-[#3B82F6] hover:text-[#3B82F6]">Register</Link>
                             </div>
-                        </div>
-                        <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-black  border-2 py-5">
-                            <li><p className="text-xl font-semibold">Dashboard</p></li>
-                            <li><p className="text-xl font-semibold">Logout</p></li>
-                        </ul>
-                    </div>
+                    }
                 </div>
             </div>
-            <div className="navbar bg-[#222222] text-white">
+            <div className="navbar bg-[#222222] text-white flex justify-between">
                 <ul className="max-[550px]:hidden menu-horizontal text-lg mx-auto font-medium gap-4 sm:gap-10 lg:gap-32 px-1 ">
                     {navOption}
                 </ul>
@@ -87,19 +97,12 @@ const NavBar = () => {
                     <div tabIndex={0} role="button" className="btn btn-ghost border-2 ">
                         <RiMenu2Fill className="text-3xl" />
                     </div>
-                    <ul tabIndex={0} className="menu menu-lg dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                        <li>
-                            <a className="justify-between">
-                                Profile
-                                <span className="badge">New</span>
-                            </a>
-                        </li>
-                        <li className=""><a>Settings</a></li>
-                        <li><a>Logout</a></li>
+                    <ul tabIndex={0} className="menu menu-lg dropdown-content mt-3 z-30 p-2 text-black shadow bg-base-100 rounded-box w-52">
+                        {navOption}
                     </ul>
                 </div>
                 {/* clock*/}
-                <div className="grid-flow-col  gap-0 md:gap-2  auto-cols-max text-xl min-[551px]:hidden">
+                <div className="grid-flow-col  gap-0 md:gap-2  auto-cols-max text-lg min-[551px]:hidden">
                     Time :
                     <div className="flex flex-col p-2">
                         <span className="countdown font-mono text-white">
@@ -112,13 +115,20 @@ const NavBar = () => {
                             <span style={{ "--value": minutes }}></span>
                         </span>
                     </div>
-                    :
-                    <div className="flex flex-col p-2">
+                    <span className="max-[324px]:hidden">:</span>
+                    <div className="flex flex-col max-[324px]:hidden p-2">
                         <span className="countdown font-mono text-white ">
                             <span style={{ "--value": seconds }}></span>
                         </span>
                     </div>
                 </div>
+                {/* Login */}
+                {
+                    !user && 
+                    <div className=" min-[550px]:hidden flex ml-5   ">
+                        <Link to={'/login'} className="bg-transparent border-2 border-white py-2 px-2 text-white rounded-md">Login</Link>
+                    </div>
+                }
 
             </div>
         </div>

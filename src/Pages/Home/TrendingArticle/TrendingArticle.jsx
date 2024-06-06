@@ -13,7 +13,7 @@ import { LuDot } from "react-icons/lu";
 
 const TrendingArticle = () => {
     const [articles, isLoading] = useArticles()
-    // console.log(articles.slice(0,7));
+    console.log(articles);
     // console.log(isLoading);
     const [currentSlide, setCurrentSlide] = useState(0)
     const [loaded, setLoaded] = useState(false)
