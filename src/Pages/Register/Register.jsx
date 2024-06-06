@@ -5,9 +5,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../Context/AuthProvider";
 import { updateProfile } from "firebase/auth";
+import LoadingModal from "../../components/LoadingModal ";
+<label htmlFor="my_modal_6" className="btn">open modal</label>
+
 
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
@@ -17,49 +20,66 @@ const Register = () => {
     const axiosPublic = useAxiosPublic()
     const navigate = useNavigate()
     // const location = useLocation()
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors }, } = useForm();
     const { createUser } = useContext(AuthContext)
+    const [loading, setLoading] = useState(false);
+
 
     const onSubmit = async (data) => {
-
-        console.log("form ",data);
+        setLoading(true);
+        console.log("form ", data);
         const imageFile = { image: data.image[0] }
-        console.log("Image",imageFile);
-        
+        console.log("Image", imageFile);
+
         axiosPublic.post(image_hosting_api, imageFile, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
         })
-        .then(res => {
-            if (res.data.success) {
-                const imageUrl = res.data.data.display_url;
-                return createUser(data.email, data.password)
-                    .then(userCredential => {
-                        return updateProfile(userCredential.user, {
-                            displayName: data.name,
-                            photoURL: imageUrl
+            .then(res => {
+                if (res.data.success) {
+                    const imageUrl = res.data.data.display_url;
+                    return createUser(data.email, data.password)
+                        .then(userCredential => {
+                            return updateProfile(userCredential.user, {
+                                displayName: data.name,
+                                photoURL: imageUrl
+                            });
+                        })
+                        .then(() => {
+                            const userInfo = {
+                                name: data.name,
+                                email: data.email,
+                                profilePicture: imageUrl,
+                                roll: 'user',
+                                premiumTaken: null
+                            };
+                            axiosPublic.post('/users', userInfo)
+                                .then(res => {
+                                    if (res.data.insertedId) {
+                                        setLoading(false);
+                                        Swal.fire({
+                                            icon: 'success',
+                                            title: 'Registration Successful',
+                                            text: 'You have been registered successfully!',
+                                        });
+                                        navigate('/');
+                                    }
+                                })
+
                         });
-                    })
-                    .then(() => {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Registration Successful',
-                            text: 'You have been registered successfully!',
-                        });
-                        navigate('/'); 
-                    });
-            } else {
-                throw new Error('Image upload failed');
-            }
-        })
-        .catch(error => {
-            Swal.fire({
-                icon: 'error',
-                title: 'Registration Failed',
-                text: error.message || 'Something went wrong. Please try again.',
+                } else {
+                    throw new Error('Image upload failed');
+                }
+            })
+            .catch(error => {
+                setLoading(false);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Registration Failed',
+                    text: error.message || 'Something went wrong. Please try again.',
+                });
             });
-        });
     };
 
 
@@ -104,9 +124,10 @@ const Register = () => {
                             maxLength: 20,
                             pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/
                         })} className="input input-bordered" />
-                        {errors.password && <span className="text-[#ED1D24]">password is required</span>}
-
-                    </div>
+                        {errors.password?.type === 'required' && <p className="text-red-600">Password is required</p>}
+                        {errors.password?.type === 'minLength' && <p className="text-red-600">Password must be 6 characters</p>}
+                        {errors.password?.type === 'maxLength' && <p className="text-red-600">Password must be less than 20 characters</p>}
+                        {errors.password?.type === 'pattern' && <p className="text-red-600">Password must have one Uppercase one lower case, one number and one special character.</p>}                    </div>
                     <div className="form-control mt-6">
                         <button type="submit" className="btn bg-black text-white">Register</button>
                     </div>
@@ -114,6 +135,7 @@ const Register = () => {
                 <div className="divider"> OR</div>
                 <div className="">
                     <Social></Social>
+                    <LoadingModal isLoading={loading} />
                 </div>
             </div>
         </div>

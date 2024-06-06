@@ -32,7 +32,7 @@ const NavBar = () => {
     const navOption = <>
         <li><NavLink to={'/'}>Home</NavLink></li>
         <li><NavLink to={'addArticle'}>Add Articles</NavLink></li>
-        <li><NavLink to={'allArticle'}> All Articles</NavLink></li>
+        <li><NavLink to={'allArticles'}> All Articles</NavLink></li>
         <li><NavLink to={'subscription'}>Subscription</NavLink></li>
         <li><NavLink to={'Dashboard'}>Dashboard</NavLink></li>
     </>
@@ -73,7 +73,7 @@ const NavBar = () => {
                             <div className="dropdown dropdown-end cursor-pointer">
                                 <div tabIndex={0} role="button" className="avatar border-2 rounded-full border-[#3B82F6]">
                                     <div className="w-14 min-[350px]:w-16 rounded-full">
-                                        <img src={user?.photoURL} />
+                                        <img className=" object-left-top" src={user?.photoURL} />
                                     </div>
                                 </div>
                                 <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-black  border-2 py-5">
