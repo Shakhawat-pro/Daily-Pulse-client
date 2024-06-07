@@ -4,15 +4,15 @@ import usePremium from "../../hooks/usePremium";
 import { FaRegUser } from "react-icons/fa";
 
 const AllArticles = () => {
-    const [articles, isLoading] = useArticles()
+    const [articles,] = useArticles()
     const [isUserPremium,] = usePremium()
     console.log(isUserPremium);
-    console.log(isLoading);
+    // console.log(isLoading);
     return (
         <div className="w-11/12 max-w-screen-xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-auto gap-10 ">
                 {articles.map(article => (
-                    <div key={article._id} className={`card h-[550px]  w-96 bg-base-100 shadow-2xl mx-auto`}>
+                    <div key={article._id} className={`card h-[550px]   bg-base-100 shadow-2xl mx-auto`}>
                         <figure className="h-[250px] relative">
                             <img className="h-full w-full" src={article.image} alt="Shoes" />
                             {article.isPremium && <img className="absolute w-20 top-3 right-3" src={premiumImg} alt="" />}
@@ -32,8 +32,11 @@ const AllArticles = () => {
                             <h2 className={`card-title`}>{article.title}</h2>
                             <p>{article.description}</p>
                             <div className="divider mb-0 divider-neutral"></div>
-                            <div className="card-actions justify-between items-center">
-                                <p className="flex items-center gap-2"><FaRegUser />{article.views}</p>
+                            <div className="flex  justify-between items-center">
+                                <div>
+                                    <p className="flex items-center gap-2"><FaRegUser />{article.views}</p>
+                                    <p><span className="font-semibold">Publisher:</span> {article.publisher}</p>
+                                </div>
                                 <button disabled={article.isPremium && !isUserPremium} className="btn bg-black text-white">Read Article</button>
                             </div>
                         </div>

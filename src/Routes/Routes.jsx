@@ -4,6 +4,7 @@ import Main from "../Layout/Main";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import AllArticles from "../Pages/AllArticles/AllArticles";
+import AddArticle from "../Pages/AddArticle/AddArticle";
 
 const router = createBrowserRouter([
     {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
             {
                 path: '/allArticles',
                 element: <AllArticles></AllArticles>
+            },
+            {
+                path: '/addArticle',
+                element: <AddArticle></AddArticle>
             }
         ]
     },

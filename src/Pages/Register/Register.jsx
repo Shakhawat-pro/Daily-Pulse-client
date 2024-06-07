@@ -84,7 +84,7 @@ const Register = () => {
 
 
     return (
-        <div className="sm:h-[700px] w-11/12 max-w-screen-lg mx-auto shadow-2xl flex flex-col  sm:flex-row-reverse items-center " >
+        <div className="sm:h-[700px] w-11/12 max-w-screen-lg mx-auto shadow-2xl flex flex-col  sm:flex-row items-center " >
             <div className="bg-black h-full sm:w-1/2 flex flex-col justify-center  items-center " >
                 <h1 className="text-white font-bold font-serif text-4xl max-sm:my-5">Join Us Today!</h1>
                 <Lottie animationData={welcome} loop={true} />;
