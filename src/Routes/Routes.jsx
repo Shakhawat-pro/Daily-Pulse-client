@@ -6,6 +6,7 @@ import Register from "../Pages/Register/Register";
 import AllArticles from "../Pages/AllArticles/AllArticles";
 import AddArticle from "../Pages/AddArticle/AddArticle";
 import PrivateRoute from "./PrivateRoute";
+import PremiumArticles from "../Pages/PremiumArticles/PremiumArticles";
 
 const router = createBrowserRouter([
     {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
             {
                 path: '/addArticle',
                 element: <PrivateRoute><AddArticle></AddArticle></PrivateRoute>
+            },
+            {
+                path: '/premiumArticles',
+                element: <PremiumArticles></PremiumArticles>
             }
         ]
     },
