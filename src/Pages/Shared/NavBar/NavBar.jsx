@@ -35,13 +35,13 @@ const NavBar = () => {
         <li><NavLink to={'allArticles'}> All Articles</NavLink></li>
         <li><NavLink to={'premiumArticles'}> Premium Articles</NavLink></li>
         <li><NavLink to={'subscription'}>Subscription</NavLink></li>
-        <li><NavLink to={'Dashboard'}>Dashboard</NavLink></li>
+        <li><NavLink to={'dashboard/AllUsers'}>Dashboard</NavLink></li>
     </>
 
 
 
     return (
-        <div className="mb-10">
+        <div className="">
             <div className="navbar md:w-11/12 mx-auto flex items-center py-4 ">
                 <div className="navbar-start max-[550px]:hidden">
                     <div className="grid grid-flow-col gap-0 md:gap-2 text-center auto-cols-max">

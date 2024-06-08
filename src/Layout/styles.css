@@ -1,0 +1,9 @@
+a.active {
+    color: #EAFF00;
+    /* border: 2px solid ; */
+    padding: 0 0 0 0;
+    border: none;
+}
+.custom-divider {
+    border-bottom: 2px solid white;
+}

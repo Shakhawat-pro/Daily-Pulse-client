@@ -7,6 +7,8 @@ import AllArticles from "../Pages/AllArticles/AllArticles";
 import AddArticle from "../Pages/AddArticle/AddArticle";
 import PrivateRoute from "./PrivateRoute";
 import PremiumArticles from "../Pages/PremiumArticles/PremiumArticles";
+import Dashboard from "../Layout/Dashboard";
+import AllUsers from "../Pages/Dashboard/AllUsers";
 
 const router = createBrowserRouter([
     {
@@ -35,10 +37,21 @@ const router = createBrowserRouter([
             },
             {
                 path: '/premiumArticles',
-                element: <PremiumArticles></PremiumArticles>
-            }
+                element: <PrivateRoute><PremiumArticles></PremiumArticles></PrivateRoute>
+            },
+            
         ]
     },
+    {
+        path: 'dashboard',
+        element:<Dashboard></Dashboard>,
+        children: [
+            {
+                path: 'AllUsers',
+                element: <AllUsers></AllUsers>
+            }
+        ]
+    }
 ]);
 
 export default router;

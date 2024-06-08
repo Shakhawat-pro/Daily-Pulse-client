@@ -5,13 +5,17 @@ import premiumImg from "../../assets/premium.png"
 const PremiumArticles = () => {
     const [premiumArticles, isLoading] = usePremiumArticles()
 
+    if (isLoading) {
+        return <div className="text-center  flex justify-center items-center"><span className="loading text-black loading-infinity w-32"></span></div>
+    }
+
 
     return (
         <div className="w-11/12 max-w-screen-xl mx-auto">
             <h1 className="text-3xl text-center font-bold my-1">Premium Articles</h1>
             <p className="text-center">Enjoy your times while reading</p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-auto gap-10">
-            {premiumArticles.map(article => (
+                {premiumArticles.map(article => (
                     <div key={article._id} className={` max-w-[400px] card h-[550px] mt-10  bg-base-100 shadow-2xl mx-auto`}>
                         <figure className="h-[250px] relative">
                             <img className="h-full w-full" src={article.image} alt="Shoes" />
@@ -37,7 +41,7 @@ const PremiumArticles = () => {
                                     <p className="flex items-center gap-2"><FaRegUser />{article.views}</p>
                                     <p><span className="font-semibold">Publisher:</span> {article.publisher}</p>
                                 </div>
-                                <button  className="btn bg-black text-white">Read Article</button>
+                                <button className="btn bg-black text-white">Read Article</button>
                             </div>
                         </div>
                     </div>
