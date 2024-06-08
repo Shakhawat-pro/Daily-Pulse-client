@@ -47,7 +47,7 @@ const router = createBrowserRouter([
         element:<Dashboard></Dashboard>,
         children: [
             {
-                path: 'AllUsers',
+                path: 'allUsers',
                 element: <AllUsers></AllUsers>
             }
         ]

@@ -35,7 +35,7 @@ const NavBar = () => {
         <li><NavLink to={'allArticles'}> All Articles</NavLink></li>
         <li><NavLink to={'premiumArticles'}> Premium Articles</NavLink></li>
         <li><NavLink to={'subscription'}>Subscription</NavLink></li>
-        <li><NavLink to={'dashboard/AllUsers'}>Dashboard</NavLink></li>
+        <li><NavLink to={'dashboard/allUsers'}>Dashboard</NavLink></li>
     </>
 
 
