@@ -9,6 +9,8 @@ import PrivateRoute from "./PrivateRoute";
 import PremiumArticles from "../Pages/PremiumArticles/PremiumArticles";
 import Dashboard from "../Layout/Dashboard";
 import AllUsers from "../Pages/Dashboard/AllUsers";
+import AdminRoute from "./AdminRoute";
+import ManageArticles from "../Pages/Dashboard/ManageArticles";
 
 const router = createBrowserRouter([
     {
@@ -48,7 +50,11 @@ const router = createBrowserRouter([
         children: [
             {
                 path: 'allUsers',
-                element: <AllUsers></AllUsers>
+                element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
+            },
+            {
+                path: 'manageArticles',
+                element: <AdminRoute><ManageArticles></ManageArticles></AdminRoute>
             }
         ]
     }

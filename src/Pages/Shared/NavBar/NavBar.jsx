@@ -3,9 +3,14 @@ import { Link, NavLink } from "react-router-dom";
 import './nav.css'
 import { RiMenu2Fill } from "react-icons/ri";
 import { AuthContext } from "../../../Context/AuthProvider";
+import useAdmin from "../../../hooks/useAdmin";
+import usePremium from "../../../hooks/usePremium";
 
 const NavBar = () => {
     const { user, logOut } = useContext(AuthContext)
+    const [isUserPremium] = usePremium()
+    const [isAdmin] = useAdmin()
+    console.log(isUserPremium);
     // console.log(user);
     const [time, setTime] = useState(new Date());
     const [hours, setHours] = useState(time.getHours());
@@ -33,15 +38,16 @@ const NavBar = () => {
         <li><NavLink to={'/'}>Home</NavLink></li>
         <li><NavLink to={'addArticle'}>Add Articles</NavLink></li>
         <li><NavLink to={'allArticles'}> All Articles</NavLink></li>
-        <li><NavLink to={'premiumArticles'}> Premium Articles</NavLink></li>
+        <li><NavLink to={'myArticles'}> My Articles</NavLink></li>
+        {isUserPremium && <li><NavLink to={'premiumArticles'}> Premium Articles</NavLink></li>}
         <li><NavLink to={'subscription'}>Subscription</NavLink></li>
-        <li><NavLink to={'dashboard/allUsers'}>Dashboard</NavLink></li>
+        {isAdmin && <li><NavLink to={'dashboard/allUsers'}>Dashboard</NavLink></li>}
     </>
 
 
 
     return (
-        <div className="">
+        <div className="mb-8">
             <div className="navbar md:w-11/12 mx-auto flex items-center py-4 ">
                 <div className="navbar-start max-[550px]:hidden">
                     <div className="grid grid-flow-col gap-0 md:gap-2 text-center auto-cols-max">
@@ -90,11 +96,11 @@ const NavBar = () => {
                 </div>
             </div>
             <div className="navbar bg-[#222222] text-white flex justify-between">
-                <ul className="max-[550px]:hidden menu-horizontal text-lg mx-auto font-medium gap-4 sm:gap-10 lg:gap-32 px-1 ">
+                <ul className="max-[950px]:hidden menu-horizontal text-lg mx-auto font-medium gap-4 sm:gap-12 px-1 ">
                     {navOption}
                 </ul>
                 {/* dropdown */}
-                <div className="dropdown min-[551px]:hidden">
+                <div className="dropdown min-[950px]:hidden">
                     <div tabIndex={0} role="button" className="btn btn-ghost border-2 ">
                         <RiMenu2Fill className="text-3xl" />
                     </div>
@@ -103,7 +109,7 @@ const NavBar = () => {
                     </ul>
                 </div>
                 {/* clock*/}
-                <div className="grid-flow-col  gap-0 md:gap-2  auto-cols-max text-lg min-[551px]:hidden">
+                <div className="grid-flow-col  gap-0 md:gap-2  auto-cols-max text-lg min-[950px]:hidden">
                     Time :
                     <div className="flex flex-col p-2">
                         <span className="countdown font-mono text-white">

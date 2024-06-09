@@ -2,6 +2,8 @@ import { NavLink, Outlet } from "react-router-dom";
 import './styles.css'
 import { TbLayoutSidebarLeftExpand } from "react-icons/tb";
 import { FaHome, FaUsers } from "react-icons/fa";
+import { RiArticleLine } from "react-icons/ri";
+import { FiEdit } from "react-icons/fi";
 
 const Dashboard = () => {
     return (
@@ -22,9 +24,9 @@ const Dashboard = () => {
                     </div>
                         {/* Sidebar content here */}
                         <li><NavLink className={'flex items-center gap-2'} to="adminHome"><FaHome />Admin Home</NavLink></li>
-                        <li><NavLink className={'flex items-center gap-2'} to="/dashboard/addPublisher">Add Publisher</NavLink></li>
-                        <li><NavLink className={'flex items-center gap-2'} to="/dashboard/managePublisher">Manage Publisher</NavLink></li>
-                        <li><NavLink className={'flex items-center gap-2'} to="/dashboard/manegeArticles">Manege Articles</NavLink></li>
+                        <li><NavLink className={'flex items-center gap-2'} to="/dashboard/addPublisher"><FiEdit />Add Publisher</NavLink></li>
+                        {/* <li><NavLink className={'flex items-center gap-2'} to="/dashboard/managePublisher">Manage Publisher</NavLink></li> */}
+                        <li><NavLink className={'flex items-center gap-2'} to="/dashboard/manageArticles"><RiArticleLine />Manage Articles</NavLink></li>
                         <li><NavLink className={'flex items-center gap-2 mb-10'} to="allUsers"><FaUsers />All Users</NavLink></li>
 
                         <div className="custom-divider"></div>
