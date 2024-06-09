@@ -10,7 +10,7 @@ const NavBar = () => {
     const { user, logOut } = useContext(AuthContext)
     const [isUserPremium] = usePremium()
     const [isAdmin] = useAdmin()
-    console.log(isUserPremium);
+    // console.log(isUserPremium);
     // console.log(user);
     const [time, setTime] = useState(new Date());
     const [hours, setHours] = useState(time.getHours());
@@ -41,7 +41,7 @@ const NavBar = () => {
         <li><NavLink to={'myArticles'}> My Articles</NavLink></li>
         {isUserPremium && <li><NavLink to={'premiumArticles'}> Premium Articles</NavLink></li>}
         <li><NavLink to={'subscription'}>Subscription</NavLink></li>
-        {isAdmin && <li><NavLink to={'dashboard/allUsers'}>Dashboard</NavLink></li>}
+        {isAdmin && <li><NavLink to={'dashboard'}>Dashboard</NavLink></li>}
     </>
 
 

@@ -12,6 +12,9 @@ import AllUsers from "../Pages/Dashboard/AllUsers";
 import AdminRoute from "./AdminRoute";
 import ManageArticles from "../Pages/Dashboard/ManageArticles";
 import AddPublisher from "../Pages/Dashboard/AddPublisher";
+import AdminHome from "../Pages/Dashboard/AdminHome";
+import MyArticles from "../Pages/MyArticles/MyArticles";
+import UpdateArticles from "../components/UpdateArticles";
 
 const router = createBrowserRouter([
     {
@@ -42,6 +45,14 @@ const router = createBrowserRouter([
                 path: '/premiumArticles',
                 element: <PrivateRoute><PremiumArticles></PremiumArticles></PrivateRoute>
             },
+            {
+                path: '/myArticles',
+                element: <PrivateRoute><MyArticles></MyArticles></PrivateRoute>
+            },
+            {
+                path: '/updateArticle/:id',
+                element: <UpdateArticles></UpdateArticles>
+            }
             
         ]
     },
@@ -49,6 +60,11 @@ const router = createBrowserRouter([
         path: 'dashboard',
         element:<Dashboard></Dashboard>,
         children: [
+            {
+                path:'/dashboard',
+                element: <AdminRoute><AdminHome></AdminHome></AdminRoute>
+
+            },
             {
                 path: 'allUsers',
                 element: <AdminRoute><AllUsers></AllUsers></AdminRoute>

@@ -9,6 +9,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../Context/AuthProvider";
 import { updateProfile } from "firebase/auth";
 import LoadingModal from "../../components/LoadingModal ";
+import axios from "axios";
 <label htmlFor="my_modal_6" className="btn">open modal</label>
 
 
@@ -31,7 +32,7 @@ const Register = () => {
         const imageFile = { image: data.image[0] }
         console.log("Image", imageFile);
 
-        axiosPublic.post(image_hosting_api, imageFile, {
+        axios.post(image_hosting_api, imageFile, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }

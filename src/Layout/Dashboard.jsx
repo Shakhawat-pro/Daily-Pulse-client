@@ -25,7 +25,7 @@ const Dashboard = () => {
                         <p className="text-2xl tracking-[.3rem] font-extrabold font-serif">Daily Pulse</p>
                     </div>
                         {/* Sidebar content here */}
-                        <li><NavLink className={'flex items-center gap-2'} to="adminHome"><FaHome />Admin Home</NavLink></li>
+                        <li><NavLink className={'flex items-center gap-2'} to="/dashboard"><FaHome />Admin Home</NavLink></li>
                         <li><NavLink className={'flex items-center gap-2'} to="/dashboard/addPublisher"><FiEdit />Add Publisher</NavLink></li>
                         {/* <li><NavLink className={'flex items-center gap-2'} to="/dashboard/managePublisher">Manage Publisher</NavLink></li> */}
                         <li><NavLink className={'flex items-center gap-2'} to="/dashboard/manageArticles"><RiArticleLine />Manage Articles</NavLink></li>
