@@ -20,8 +20,8 @@ const Register = () => {
     const axiosPublic = useAxiosPublic()
     const navigate = useNavigate()
     // const location = useLocation()
-    const { register, handleSubmit, formState: { errors }, } = useForm();
     const { createUser } = useContext(AuthContext)
+    const { register, handleSubmit, formState: { errors }, } = useForm();
     const [loading, setLoading] = useState(false);
 
 

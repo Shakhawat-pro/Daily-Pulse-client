@@ -11,6 +11,7 @@ import Dashboard from "../Layout/Dashboard";
 import AllUsers from "../Pages/Dashboard/AllUsers";
 import AdminRoute from "./AdminRoute";
 import ManageArticles from "../Pages/Dashboard/ManageArticles";
+import AddPublisher from "../Pages/Dashboard/AddPublisher";
 
 const router = createBrowserRouter([
     {
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
             {
                 path: 'manageArticles',
                 element: <AdminRoute><ManageArticles></ManageArticles></AdminRoute>
+            },
+            {
+                path: 'addPublisher',
+                element: <AdminRoute><AddPublisher></AddPublisher></AdminRoute>
             }
         ]
     }

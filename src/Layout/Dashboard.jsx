@@ -4,6 +4,8 @@ import { TbLayoutSidebarLeftExpand } from "react-icons/tb";
 import { FaHome, FaUsers } from "react-icons/fa";
 import { RiArticleLine } from "react-icons/ri";
 import { FiEdit } from "react-icons/fi";
+import { GiNewspaper } from "react-icons/gi";
+import { MdOutlineWorkspacePremium } from "react-icons/md";
 
 const Dashboard = () => {
     return (
@@ -31,9 +33,9 @@ const Dashboard = () => {
 
                         <div className="custom-divider"></div>
                         <li><NavLink className={'flex items-center gap-2'} to={'/'}><FaHome /> Home</NavLink></li>
-                        <li><NavLink className={'flex items-center gap-2'} to={'/addArticle'}>Add Articles</NavLink></li>
-                        <li><NavLink className={'flex items-center gap-2'} to={'/allArticles'}> All Articles</NavLink></li>
-                        <li><NavLink className={'flex items-center gap-2'} to={'/premiumArticles'}> Premium Articles</NavLink></li>
+                        <li><NavLink className={'flex items-center gap-2'} to={'/addArticle'}><FiEdit />Add Articles</NavLink></li>
+                        <li><NavLink className={'flex items-center gap-2'} to={'/allArticles'}><GiNewspaper />All Articles</NavLink></li>
+                        <li><NavLink className={'flex items-center gap-2'} to={'/premiumArticles'}><MdOutlineWorkspacePremium /> Premium Articles</NavLink></li>
                     </ul>
                 </div>
             </div>
