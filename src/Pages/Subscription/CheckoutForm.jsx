@@ -5,9 +5,10 @@ import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Context/AuthProvider';
 import { useNavigate } from 'react-router-dom';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
 // import Swal from 'sweetalert2';
 
-const CheckoutForm = ({ price }) => {
+const CheckoutForm = ({ price, selectedPeriod  }) => {
     const [error, setError] = useState('');
     const [clientSecret, setClientSecret] = useState("");
     const { user } = useContext(AuthContext)
@@ -21,6 +22,7 @@ const CheckoutForm = ({ price }) => {
     const stripe = useStripe();
     const elements = useElements();
     const axiosSecure = useAxiosSecure()
+    const axiosPublic = useAxiosPublic()
 
     useEffect(() => {
         if (price > 0) {
@@ -86,6 +88,16 @@ const CheckoutForm = ({ price }) => {
             if (paymentIntent.status === 'succeeded') {
                 console.log('transaction id', paymentIntent.id);
                 setTransactionId(paymentIntent.id)
+                const premiumTaken = new Date(Date.now() + selectedPeriod * 24 * 60 * 60 * 1000).toISOString(); // Calculate the expiry date
+                console.log(premiumTaken);
+
+                await axiosPublic.patch('/update-premium', {
+                    email: user.email,
+                    premiumTaken
+                });
+                console.log('Premium taken updated successfully');
+
+            
             }
         }
 
@@ -123,5 +135,6 @@ const CheckoutForm = ({ price }) => {
 export default CheckoutForm;
 
 CheckoutForm.propTypes = {
-    price: PropTypes.number
+    price: PropTypes.number,
+    selectedPeriod: PropTypes.number
 }

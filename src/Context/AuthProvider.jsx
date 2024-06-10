@@ -9,8 +9,8 @@ export const AuthContext = createContext()
 
 
 const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState([])
-    // console.log(user);
+    const [user, setUser] = useState(null)
+    console.log(user);
     const [loading, setLoading] = useState(true)
     const axiosPublic = useAxiosPublic()
 
@@ -36,11 +36,18 @@ const AuthProvider = ({ children }) => {
             if(currentUser){
                 const userInfo = {email: currentUser.email}
                 axiosPublic.post('/jwt', userInfo)
-                .then(res => {
+                .then(async res => {
                     // console.log(res.data);
                     if(res.data.token){
                         localStorage.setItem('access-token', res.data.token)
                         setLoading(false)
+                        const userResponse = await axiosPublic.get(`/user/${currentUser.email}`)
+                        console.log(userResponse.data.premiumTaken);
+                        const userData = userResponse.data;
+                        if (userData.premiumTaken && new Date() > new Date(userData.premiumTaken)){
+                            await axiosPublic.patch(`/user/${currentUser.email}`)
+                            console.log('Sorry');
+                        }
                     }
                 })
             }

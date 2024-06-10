@@ -1,6 +1,6 @@
 import { useState } from "react";
-import bannerImg from "../../assets/banner.jpg"
-import "./Sub.css"
+import bannerImg from "../../assets/banner.jpg";
+import "./Sub.css";
 import ReactModal from "react-modal";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
@@ -8,19 +8,17 @@ import CheckoutForm from "./CheckoutForm";
 
 ReactModal.setAppElement('#root');
 
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY)
-
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 const Subscription = () => {
-    const [selectedPeriod, setSelectedPeriod] = useState('');
+    const [selectedPeriod, setSelectedPeriod] = useState(0);
     const [price, setPrice] = useState(0);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-
     const subscriptionOptions = [
-        { value: '1 minute', label: '1 Minute - $1', price: 1 },
-        { value: '5 days', label: '5 Days - $10', price: 10 },
-        { value: '10 days', label: '10 Days - $20', price: 20 },
+        { value: 1 / (24 * 60), label: '1 Minute - $1', price: 1 }, 
+        { value: 5, label: '5 Days - $10', price: 10 },
+        { value: 10, label: '10 Days - $20', price: 20 }, 
     ];
 
     const handleSubscriptionChange = (option) => {
@@ -41,7 +39,7 @@ const Subscription = () => {
             <div className="banner relative rounded-xl overflow-clip">
                 <img src={bannerImg} alt="Banner" className="w-full h-64 object-fill" />
                 <div className="absolute top-0 left-0 w-full h-full flex items-center flex-col justify-center">
-                    <h1 className=" text-gradient font-serif sm:text-4xl">Welcome to Our News Platform</h1>
+                    <h1 className="text-gradient font-serif sm:text-4xl">Welcome to Our News Platform</h1>
                     <h1 className="premium-text">Premium Subscription</h1>
                 </div>
             </div>
@@ -53,8 +51,8 @@ const Subscription = () => {
                     <li>Post Unlimited Articles</li>
                 </ul>
                 <div className="flex flex-col items-center mt-5">
-                    <select className="select select-bordered w-full max-w-xs mb-5" value={selectedPeriod} onChange={(e) => handleSubscriptionChange(subscriptionOptions.find(opt => opt.value === e.target.value))}                    >
-                        <option value="" disabled>Select Subscription Period</option>
+                    <select className="select select-bordered w-full max-w-xs mb-5" value={selectedPeriod} onChange={(e) => handleSubscriptionChange(subscriptionOptions.find(opt => opt.value === parseFloat(e.target.value)))}                    >
+                        <option value="" >Select Subscription Period</option>
                         {subscriptionOptions.map(option => (
                             <option key={option.value} value={option.value}>{option.label}</option>
                         ))}
@@ -70,10 +68,10 @@ const Subscription = () => {
                 overlayClassName="Overlay"
             >
                 <h2 className="text-2xl font-bold mb-4">Confirm Subscription</h2>
-                <p>You`re subscribing for {selectedPeriod} at ${price}.</p>
+                <p>You`re subscribing for {selectedPeriod < 1 ? 1 : selectedPeriod} {selectedPeriod > 1 ? 'days' : 'Minute'} at ${price}.</p>
                 <div>
                     <Elements stripe={stripePromise}>
-                        <CheckoutForm price={price}></CheckoutForm>
+                        <CheckoutForm price={price} selectedPeriod={selectedPeriod} />
                     </Elements>
                 </div>
                 <div className="absolute bottom-5 right-5">
@@ -81,7 +79,6 @@ const Subscription = () => {
                 </div>
 
             </ReactModal>
-
         </div>
     );
 };
