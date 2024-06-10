@@ -95,7 +95,7 @@ const NavBar = () => {
                     }
                 </div>
             </div>
-            <div className="navbar bg-[#222222] text-white flex justify-between">
+            <div className="navbar bg-black text-white flex justify-between">
                 <ul className="max-[950px]:hidden menu-horizontal text-lg mx-auto font-medium gap-4 sm:gap-12 px-1 ">
                     {navOption}
                 </ul>

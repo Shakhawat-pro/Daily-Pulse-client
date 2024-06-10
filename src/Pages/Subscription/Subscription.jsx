@@ -1,9 +1,21 @@
 import { useState } from "react";
 import bannerImg from "../../assets/banner.jpg"
 import "./Sub.css"
+import ReactModal from "react-modal";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import CheckoutForm from "./CheckoutForm";
+
+ReactModal.setAppElement('#root');
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY)
+
+
 const Subscription = () => {
     const [selectedPeriod, setSelectedPeriod] = useState('');
     const [price, setPrice] = useState(0);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
 
     const subscriptionOptions = [
         { value: '1 minute', label: '1 Minute - $1', price: 1 },
@@ -14,6 +26,14 @@ const Subscription = () => {
     const handleSubscriptionChange = (option) => {
         setSelectedPeriod(option.value);
         setPrice(option.price);
+    };
+
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
     };
 
     return (
@@ -39,9 +59,28 @@ const Subscription = () => {
                             <option key={option.value} value={option.value}>{option.label}</option>
                         ))}
                     </select>
-                    <button className="btn bg-black text-white">Subscribe for ${price}</button>
+                    <button onClick={openModal} disabled={price === 0} className="btn bg-black text-white">Subscribe for ${price}</button>
                 </div>
             </div>
+            <ReactModal
+                isOpen={isModalOpen}
+                onRequestClose={closeModal}
+                contentLabel="Subscription Modal"
+                className="Modal relative"
+                overlayClassName="Overlay"
+            >
+                <h2 className="text-2xl font-bold mb-4">Confirm Subscription</h2>
+                <p>You`re subscribing for {selectedPeriod} at ${price}.</p>
+                <div>
+                    <Elements stripe={stripePromise}>
+                        <CheckoutForm price={price}></CheckoutForm>
+                    </Elements>
+                </div>
+                <div className="absolute bottom-5 right-5">
+                    <button className="btn bg-gray-500 text-white mt-5 ml-3" onClick={closeModal}>Cancel</button>
+                </div>
+
+            </ReactModal>
 
         </div>
     );

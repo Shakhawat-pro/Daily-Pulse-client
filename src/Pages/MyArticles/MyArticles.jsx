@@ -49,6 +49,7 @@ const MyArticles = () => {
             }
         });
     }
+    console.log(articles.length);
 
     const handleShowRejectionReason = (reason) => {
         console.log(reason);
@@ -61,8 +62,10 @@ const MyArticles = () => {
     }
 
     return (
-        <div className="max-w-screen-xl w-11/12 mx-auto ">
-            <div className="shadow-2xl p-5 rounded-md mb-10 ">
+        <div className="max-w-screen-xl w-11/12 mx-auto mt-20">
+            {
+                articles.length === 0 ?   <h1 className="text-center text-4xl">Oops its seems you don`t have any article </h1> :
+                <div className="shadow-2xl p-5 rounded-md mb-10 ">
                 <div className="sm:text-2xl  md:text-4xl my-6 font-bold cinzel text-center">
                     <div className="space-y-2 ">
                         <h2>Total Articles:  {articles?.length}</h2>
@@ -125,6 +128,8 @@ const MyArticles = () => {
                     </table>
                 </div>
             </div>
+            }
+
             <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
                 <div className="modal-box">
                     <h3 className="font-bold text-lg text-center">Reason for Rejection</h3>
