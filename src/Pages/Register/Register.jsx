@@ -57,8 +57,9 @@ const Register = () => {
                             };
                             axiosPublic.post('/users', userInfo)
                                 .then(res => {
+                                    console.log(res);
+                                    setLoading(false);
                                     if (res.data.insertedId) {
-                                        setLoading(false);
                                         Swal.fire({
                                             icon: 'success',
                                             title: 'Registration Successful',
@@ -66,9 +67,14 @@ const Register = () => {
                                         });
                                         navigate('/');
                                     }
+                                    Swal.fire({
+                                        icon: 'info',
+                                        title: '"User already existed"',
+                                    });
+                                    navigate('/');
                                 })
-
                         });
+
                 } else {
                     throw new Error('Image upload failed');
                 }

@@ -1,0 +1,18 @@
+/* Subscription.css */
+.text-container {
+    text-align: center;
+}
+
+.text-gradient {
+    font-weight: bold;
+    background: linear-gradient(to right, #ffd700, #ffcc00); 
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.3); 
+}
+
+.premium-text {
+    font-weight: bold;
+    color: #ffd700; /* Set gold color */
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.3); 
+}
