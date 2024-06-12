@@ -52,7 +52,7 @@ const Register = () => {
                                 name: data.name,
                                 email: data.email,
                                 profilePicture: imageUrl,
-                                roll: 'user',
+                                role: 'user',
                                 premiumTaken: null
                             };
                             axiosPublic.post('/users', userInfo)

@@ -13,6 +13,7 @@ const AuthProvider = ({ children }) => {
     console.log(user);
     const [loading, setLoading] = useState(true)
     const axiosPublic = useAxiosPublic()
+    const [isPremiumTaken, setIsPremiumTaken] = useState(true)
 
     const googleProvider = new GoogleAuthProvider()
 
@@ -42,11 +43,15 @@ const AuthProvider = ({ children }) => {
                         localStorage.setItem('access-token', res.data.token)
                         setLoading(false)
                         const userResponse = await axiosPublic.get(`/user/${currentUser.email}`)
-                        console.log(userResponse.data.premiumTaken);
+                        // console.log(userResponse.data.premiumTaken);
                         const userData = userResponse.data;
                         if (userData.premiumTaken && new Date() > new Date(userData.premiumTaken)){
                             await axiosPublic.patch(`/user/${currentUser.email}`)
                             console.log('Sorry');
+                            setIsPremiumTaken(false)
+                        }
+                        else{
+                            setIsPremiumTaken(true)
                         }
                     }
                 })
@@ -78,7 +83,8 @@ const AuthProvider = ({ children }) => {
         signInWithGoogle,
         createUser,
         signInUser,
-        logOut
+        logOut,
+        isPremiumTaken
     }
     return (
         <AuthContext.Provider value={authInfo}>

@@ -137,7 +137,7 @@ const AllUsers = () => {
                                 <th></th>
                                 <th>Name</th>
                                 <th>Premium</th>
-                                <th>Roll</th>
+                                <th>Role</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -167,15 +167,14 @@ const AllUsers = () => {
                                         {item.role === 'admin' ?
                                             <button
                                                 onClick={() => handleRemoveAdmin(item)}
-                                                className="btn  bg-green-500 tooltip " data-tip='Guest user'>
+                                                className="btn  bg-green-500 tooltip " data-tip='Admin'>
                                                 <GrUserAdmin className="text-white text-2xl "></GrUserAdmin>
                                             </button>
 
                                             : <button
                                                 onClick={() => handleMakeAdmin(item)}
-                                                className="btn  bg-orange-500">
-                                                <FaUsers className="text-white 
-                                        text-2xl"></FaUsers>
+                                                className="btn  bg-orange-500 tooltip" data-tip='Guest user'>
+                                                <FaUsers className="text-white text-2xl"></FaUsers>
                                             </button>}
                                     </td>
                                     <th>

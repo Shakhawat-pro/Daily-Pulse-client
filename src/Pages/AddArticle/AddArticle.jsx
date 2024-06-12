@@ -100,9 +100,7 @@ const AddArticle = () => {
 
 
 
-    // if (isLoading) {
-    //     return <div className="w-fit mx-auto"><span className="loading loading-spinner  w-20 text-info"></span></div>;
-    // }
+
 
     return (
         <div className="max-w-screen-lg w-11/12 p-10 mx-auto shadow-2xl border-2 border-black rounded-lg">

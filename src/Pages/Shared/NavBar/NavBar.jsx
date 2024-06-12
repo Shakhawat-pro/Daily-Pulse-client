@@ -84,7 +84,7 @@ const NavBar = () => {
                                     </div>
                                 </div>
                                 <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-black  border-2 py-5">
-                                    <li><p className="text-xl font-semibold">Profile</p></li>
+                                    <li><Link to="updateProfile" className="text-xl font-semibold">Profile</Link></li>
                                     <li onClick={logOut}><p className="text-xl font-semibold">Logout</p></li>
                                 </ul>
                             </div> :

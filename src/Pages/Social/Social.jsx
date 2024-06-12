@@ -20,7 +20,7 @@ const Social = () => {
                     email: result.user?.email,
                     name: result.user?.displayName,
                     profilePicture: result.user?.photoURL,
-                    roll: 'user',
+                    role: 'user',
                     premiumTaken: null
                 }
                 Swal.fire({

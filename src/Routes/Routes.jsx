@@ -16,6 +16,8 @@ import AdminHome from "../Pages/Dashboard/AdminHome";
 import MyArticles from "../Pages/MyArticles/MyArticles";
 import UpdateArticles from "../components/UpdateArticles";
 import Subscription from "../Pages/Subscription/Subscription";
+import UpdateProfile from "../Pages/Profile/UpdateProfile";
+import SoloArticle from "../Pages/SoloArticle.jsx/SoloArticle";
 
 const router = createBrowserRouter([
     {
@@ -57,6 +59,14 @@ const router = createBrowserRouter([
             {
                 path: '/subscription',
                 element: <PrivateRoute><Subscription></Subscription></PrivateRoute>
+            },
+            {
+                path: '/updateProfile',
+                element: <PrivateRoute><UpdateProfile></UpdateProfile></PrivateRoute>
+            },
+            {
+                path: "/soloArticle/:id",
+                element: <PrivateRoute><SoloArticle></SoloArticle></PrivateRoute>
             }
             
         ]

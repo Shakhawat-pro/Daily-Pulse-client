@@ -5,6 +5,7 @@ import { FaRegUser } from "react-icons/fa";
 import { useState } from "react";
 import Select from 'react-select';
 import usePublishers from "../../hooks/usePublishers";
+import { useNavigate } from "react-router-dom";
 
 const tagOptions = [
     { value: 'news', label: 'News' },
@@ -31,6 +32,7 @@ const AllArticles = () => {
     const [publishers] = usePublishers();
     const [isUserPremium,] = usePremium()
     const [articles, isLoading] = useArticles(searchTerm, selectedPublisher, selectedTags);
+    const navigate = useNavigate()
     // console.log(isUserPremium);
 
     // console.log(isLoading);
@@ -46,6 +48,10 @@ const AllArticles = () => {
         const tags = selectedOptions ? selectedOptions.map(option => option.value) : [];
         setSelectedTags(tags);
     };
+
+    const handleClick = (id) => {
+        navigate(`/soloArticle/${id}`)
+    }
 
     return (
         <div className="w-11/12 max-w-screen-xl mx-auto">
@@ -130,7 +136,7 @@ const AllArticles = () => {
                                                 <p className="flex items-center gap-2"><FaRegUser />{article.views}</p>
                                                 <p><span className="font-semibold">Publisher:</span> {article.publisher}</p>
                                             </div>
-                                            <button 
+                                            <button onClick={() => handleClick(article._id)}
                                                 disabled={article.isPremium && !isUserPremium} 
                                                 className="btn bg-black text-white"
                                             >
