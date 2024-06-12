@@ -13,7 +13,7 @@ const AuthProvider = ({ children }) => {
     console.log(user);
     const [loading, setLoading] = useState(true)
     const axiosPublic = useAxiosPublic()
-    const [isPremiumTaken, setIsPremiumTaken] = useState(true)
+    const [isPremiumTaken, setIsPremiumTaken] = useState(false)
 
     const googleProvider = new GoogleAuthProvider()
 
@@ -45,7 +45,10 @@ const AuthProvider = ({ children }) => {
                         const userResponse = await axiosPublic.get(`/user/${currentUser.email}`)
                         // console.log(userResponse.data.premiumTaken);
                         const userData = userResponse.data;
-                        if (userData.premiumTaken && new Date() > new Date(userData.premiumTaken)){
+                        const premiumTakenDate = new Date(userData.premiumTaken);
+                        // console.log(premiumTakenDate);
+                        const currentDate = new Date();
+                        if (premiumTakenDate && currentDate > premiumTakenDate) {
                             await axiosPublic.patch(`/user/${currentUser.email}`)
                             console.log('Sorry');
                             setIsPremiumTaken(false)

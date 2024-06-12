@@ -8,6 +8,7 @@ import useAxiosPublic from '../../hooks/useAxiosPublic';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 import LoadingModal from '../../components/LoadingModal ';
+import { useNavigate } from 'react-router-dom';
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -23,6 +24,7 @@ const AddArticle = () => {
         label: item.name
     }))
     // console.log(publisherOptions);
+    const navigate = useNavigate()
     const tagOptions = [
         { value: 'news', label: 'News' },
         { value: 'sports', label: 'Sports' },
@@ -84,6 +86,7 @@ const AddArticle = () => {
                             icon: 'success',
                             title: 'Article posted successfully',
                         });
+                        navigate('/')
                     }else{
                         Swal.fire({
                             icon: 'error',

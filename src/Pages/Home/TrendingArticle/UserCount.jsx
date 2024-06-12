@@ -5,7 +5,7 @@ import useUserCount from "../../../hooks/useUserCount";
 
 const UserCount = () => {
     const users = useUserCount()
-    console.log(users);
+    // console.log(users);
     return (
         <div className=" my-10">
             <h1 className="text-center text-4xl font-bold font-serif mb-5">User Count</h1>

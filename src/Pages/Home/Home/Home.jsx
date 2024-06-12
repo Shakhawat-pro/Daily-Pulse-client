@@ -19,7 +19,7 @@ const Home = () => {
     const { isPremiumTaken } = useContext(AuthContext)
     const [isModalOpen, setIsModalOpen] = useState(false);
     const navigate = useNavigate();
-    console.log(isPremiumTaken);
+    // console.log("is premium",isPremiumTaken);
 
     useEffect(() => {
         if (!isPremiumTaken) {

@@ -8,7 +8,7 @@ import usePublishers from "../../../hooks/usePublishers"
 
 const Publishers = () => {
     const [publishers, isLoading] = usePublishers()
-    console.log(publishers);
+    // console.log(publishers);
 
     const [ setCurrentSlide] = useState(0)
     const [loaded, setLoaded] = useState(false)
@@ -99,6 +99,6 @@ function Arrow(props) {
 
 Arrow.propTypes = {
     left: PropTypes.bool,
-    onClick: PropTypes.func.isRequired,
-    disabled: PropTypes.bool.isRequired,
+    onClick: PropTypes.func,
+    disabled: PropTypes.bool,
 };
