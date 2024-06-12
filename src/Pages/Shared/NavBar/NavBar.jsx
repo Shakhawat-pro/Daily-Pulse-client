@@ -40,7 +40,7 @@ const NavBar = () => {
         <li><NavLink to={'allArticles'}> All Articles</NavLink></li>
         {user && <li><NavLink to={'myArticles'}> My Articles</NavLink></li>}
         {isUserPremium && user && <li><NavLink to={'premiumArticles'}> Premium Articles</NavLink></li>}
-        {user && <li><NavLink to={'subscription'}>Subscription</NavLink></li>}
+        <li><NavLink to={'subscription'}>Subscription</NavLink></li>
         {isAdmin && user && <li><NavLink to={'dashboard'}>Dashboard</NavLink></li>}
     </>
 
@@ -131,7 +131,7 @@ const NavBar = () => {
                 </div>
                 {/* Login */}
                 {
-                    !user && 
+                    !user &&
                     <div className=" min-[550px]:hidden flex ml-5   ">
                         <Link to={'/login'} className="bg-transparent border-2 border-white py-2 px-2 text-white rounded-md">Login</Link>
                     </div>

@@ -1,7 +1,7 @@
 import Lottie from "lottie-react";
 import welcome from '../../assets/welcome.json'
 import Social from "../Social/Social";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { AuthContext } from "../../Context/AuthProvider";
@@ -10,6 +10,7 @@ import Swal from "sweetalert2";
 const Login = () => {
     const {signInUser} = useContext(AuthContext)
     const navigate = useNavigate()
+    const location = useLocation()
     const { register, handleSubmit, formState: { errors }, } = useForm();
 
     const onSubmit = async (data) => {
@@ -20,7 +21,11 @@ const Login = () => {
                 icon: 'success',
                 title: 'Login Successful',
             }).then(() =>{
-                navigate('/');
+                // navigate('/');
+                
+                {
+                    location.state? navigate(location.state) : navigate('/')
+                }
             })
             
         })

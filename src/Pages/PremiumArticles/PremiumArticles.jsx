@@ -1,9 +1,16 @@
 import { FaRegUser } from "react-icons/fa";
 import usePremiumArticles from "../../hooks/usePremiumArticles";
 import premiumImg from "../../assets/premium.png"
+import { useNavigate } from "react-router-dom";
 
 const PremiumArticles = () => {
     const [premiumArticles, isLoading] = usePremiumArticles()
+    const navigate = useNavigate()
+
+
+    const handleClick = (id) => {
+        navigate(`/soloArticle/${id}`)
+    }
 
     if (isLoading) {
         return <div className="text-center  flex justify-center items-center"><span className="loading text-black loading-infinity w-32"></span></div>
@@ -41,7 +48,7 @@ const PremiumArticles = () => {
                                     <p className="flex items-center gap-2"><FaRegUser />{article.views}</p>
                                     <p><span className="font-semibold">Publisher:</span> {article.publisher}</p>
                                 </div>
-                                <button className="btn bg-black text-white">Read Article</button>
+                                <button onClick={() => handleClick(article._id)} className="btn bg-black text-white">Read Article</button>
                             </div>
                         </div>
                     </div>

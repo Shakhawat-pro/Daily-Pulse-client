@@ -7,12 +7,15 @@ import PropTypes from 'prop-types';
 import Marquee from "react-fast-marquee";
 import { FaRegUser } from "react-icons/fa";
 import { LuDot } from "react-icons/lu";
+import { useNavigate } from "react-router-dom";
 
 
 
 
 const TrendingArticle = () => {
     const [articles, isLoading] = useArticles()
+    const navigate = useNavigate()
+
     // console.log(articles);
     // console.log(isLoading);
     const [currentSlide, setCurrentSlide] = useState(0)
@@ -40,6 +43,10 @@ const TrendingArticle = () => {
             setLoaded(true)
         },
     })
+
+    const handleClick = (id) => {
+        navigate(`/soloArticle/${id}`)
+    }
 
     if (isLoading) {
         return <div className="w-fit mx-auto"><span className="loading loading-spinner  w-20 text-info"></span></div>;
@@ -76,7 +83,7 @@ const TrendingArticle = () => {
                 <div ref={sliderRef} className="keen-slider">
                     {
                         articles.slice(0, 6).map((article, index) => (
-                            <div key={article._id} className={` relative keen-slider__slide number-slide${index + 1}`}>
+                            <div key={article._id} onClick={() => handleClick(article._id)} className={` relative cursor-pointer keen-slider__slide number-slide${index + 1}`}>
                                 <img className="h-full object-cover " src={article.image} alt="" />
                                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black " style={{ paddingTop: '300px' }}></div>
                                 <div className="absolute p-5 space-y-3">

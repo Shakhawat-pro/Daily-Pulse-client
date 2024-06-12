@@ -94,7 +94,9 @@ const CheckoutForm = ({ price, selectedPeriod  }) => {
                 await axiosPublic.patch('/update-premium', {
                     email: user.email,
                     premiumTaken
-                });
+                }).then(() =>{
+                    navigate('/')
+                })
                 console.log('Premium taken updated successfully');
 
             

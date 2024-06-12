@@ -6,6 +6,9 @@ import ReactModal from "react-modal";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Context/AuthProvider";
+import PriceCard from "../PriceCard";
+import UserCount from "../TrendingArticle/UserCount";
+import Publishers from "../Publishers/Publishers";
 
 
 
@@ -56,6 +59,9 @@ const Home = () => {
                     <button className="btn bg-black text-white" onClick={handleSubscribeClick}>Subscribe Now</button>
                 </div>
             </ReactModal>
+            <Publishers></Publishers>
+            <PriceCard></PriceCard>
+            <UserCount></UserCount>
         </div>
     );
 };
