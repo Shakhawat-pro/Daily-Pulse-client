@@ -6,6 +6,7 @@ import { useState } from "react";
 import Select from 'react-select';
 import usePublishers from "../../hooks/usePublishers";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const tagOptions = [
     { value: 'news', label: 'News' },
@@ -55,6 +56,9 @@ const AllArticles = () => {
 
     return (
         <div className="w-11/12 max-w-screen-xl mx-auto">
+            <Helmet>
+                <title>DailyPulse | All Articles</title>
+            </Helmet>
             <h1 className="text-5xl  font-bold font-serif text-center">All articles</h1>
             <div className=" border-2 my-10 border-black shadow-xl rounded-xl p-10">
                 <h1 className="text-xl font-bold text-center">Find what you need?</h1>
@@ -137,7 +141,7 @@ const AllArticles = () => {
                                                 <p><span className="font-semibold">Publisher:</span> {article.publisher}</p>
                                             </div>
                                             <button onClick={() => handleClick(article._id)}
-                                                disabled={article.isPremium && !isUserPremium} 
+                                                disabled={article.isPremium && !isUserPremium}
                                                 className="btn bg-black text-white"
                                             >
                                                 Read Article

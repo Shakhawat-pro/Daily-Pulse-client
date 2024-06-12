@@ -9,6 +9,7 @@ import useAxiosSecure from '../../hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 import LoadingModal from '../../components/LoadingModal ';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -57,7 +58,7 @@ const AddArticle = () => {
                 'Content-Type': 'multipart/form-data'
             }
         }).then(res => {
-            if(res.data.success){
+            if (res.data.success) {
                 const imageUrl = res.data.data.display_url;
                 const info = {
                     title: data.title,
@@ -75,26 +76,26 @@ const AddArticle = () => {
                     isPremium: false,
                     views: 0,
                     postedDate: new Date().toISOString()
-        
+
                 }
                 axiosSecure.post('/articles', info)
-                .then(res => {
-                    console.log(res)
-                    setLoading(false);
-                    if(res.data.result?.insertedId){
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Article posted successfully',
-                        });
-                        navigate('/')
-                    }else{
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Please Subscribe',
-                            text: `${res.data.message}`
-                        });   
-                    }
-                })
+                    .then(res => {
+                        console.log(res)
+                        setLoading(false);
+                        if (res.data.result?.insertedId) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Article posted successfully',
+                            });
+                            navigate('/')
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Please Subscribe',
+                                text: `${res.data.message}`
+                            });
+                        }
+                    })
             }
         })
 
@@ -107,6 +108,9 @@ const AddArticle = () => {
 
     return (
         <div className="max-w-screen-lg w-11/12 p-10 mx-auto shadow-2xl border-2 border-black rounded-lg">
+            <Helmet>
+                <title>DailyPulse | Add Article</title>
+            </Helmet>
             <h1 className="font-bold text-2xl text-center">Write Your Own Article</h1>
             <form onSubmit={handleSubmit(onSubmit)} className="mt-5 ">
                 <div className='flex sm:justify-between flex-col sm:flex-row sm:gap-10'>

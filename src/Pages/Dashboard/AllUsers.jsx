@@ -7,6 +7,7 @@ import { GrUserAdmin } from "react-icons/gr";
 import ReactPaginate from 'react-paginate';
 import { useState } from "react";
 import './page.css'
+import { Helmet } from "react-helmet-async";
 
 const AllUsers = () => {
     const [currentPage, setCurrentPage] = useState(1);
@@ -128,6 +129,9 @@ const AllUsers = () => {
 
     return (
         <div className="max-w-screen-xl w-10/12 mx-auto ">
+            <Helmet>
+                <title>DailyPulse | All Users</title>
+            </Helmet>
             <SectionTitle heading={"All users"} subHeading={'Manage all of your users'}></SectionTitle>
             <div className="shadow-2xl p-5 rounded-md mb-10 ">
                 <div className="sm:text-2xl  md:text-4xl my-6 font-bold cinzel text-center">

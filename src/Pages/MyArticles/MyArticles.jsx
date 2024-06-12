@@ -5,6 +5,7 @@ import { format } from "date-fns";
 import Swal from "sweetalert2";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const MyArticles = () => {
     const axiosSecure = useAxiosSecure()
@@ -63,71 +64,74 @@ const MyArticles = () => {
 
     return (
         <div className="max-w-screen-xl w-11/12 mx-auto mt-20">
+            <Helmet>
+                <title>DailyPulse | My Articles</title>
+            </Helmet>
             {
-                articles.length === 0 ?   <h1 className="text-center text-4xl">Oops its seems you don`t have any article </h1> :
-                <div className="shadow-2xl p-5 rounded-md mb-10 ">
-                <div className="sm:text-2xl  md:text-4xl my-6 font-bold cinzel text-center">
-                    <div className="space-y-2 ">
-                        <h2>Total Articles:  {articles?.length}</h2>
-                    </div>
-                </div>
-                <div className="overflow-x-auto rounded-t-lg ">
-                    <table className="table">
-                        <thead>
-                            <tr className=" bg-black text-white uppercase inter ">
-                                <th></th>
-                                <th>Article</th>
-                                <th>Premium</th>
-                                <th>Date</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                articles?.map((item, index) => <tr key={item._id}>
-                                    <th>
-                                        {index + 1}
-                                    </th>
-                                    <td className="">
-                                        <div className="flex items-center gap-3">
-                                            <div className="avatar">
-                                                <div className="mask mask-squircle w-12 h-12">
-                                                    <img className="object-top" src={item.image} alt="Avatar Tailwind CSS Component" />
+                articles.length === 0 ? <h1 className="text-center text-4xl">Oops its seems you don`t have any article </h1> :
+                    <div className="shadow-2xl p-5 rounded-md mb-10 ">
+                        <div className="sm:text-2xl  md:text-4xl my-6 font-bold cinzel text-center">
+                            <div className="space-y-2 ">
+                                <h2>Total Articles:  {articles?.length}</h2>
+                            </div>
+                        </div>
+                        <div className="overflow-x-auto rounded-t-lg ">
+                            <table className="table">
+                                <thead>
+                                    <tr className=" bg-black text-white uppercase inter ">
+                                        <th></th>
+                                        <th>Article</th>
+                                        <th>Premium</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        articles?.map((item, index) => <tr key={item._id}>
+                                            <th>
+                                                {index + 1}
+                                            </th>
+                                            <td className="">
+                                                <div className="flex items-center gap-3">
+                                                    <div className="avatar">
+                                                        <div className="mask mask-squircle w-12 h-12">
+                                                            <img className="object-top" src={item.image} alt="Avatar Tailwind CSS Component" />
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <div className="font-bold">{item.title}</div>
+                                                        <div className="text-sm opacity-50">{item.publisher}</div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div>
-                                                <div className="font-bold">{item.title}</div>
-                                                <div className="text-sm opacity-50">{item.publisher}</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td className="">
-                                        {item.isPremium === false ? <p className=" text-red-600 font-bold text-xl">No</p> : <p className=" text-green-600 font-bold text-xl">Yes</p>}
-                                    </td>
-                                    <td className="">
-                                        {formatDate(item.postedDate)}
-                                    </td>
-                                    <td className="font-bold">
-                                        {item.status === "rejected" ? <h1 className="text-red-500 font-bold flex items-center gap-1 cursor-pointer" onClick={() => handleShowRejectionReason(item.reason)}
-                                        >Rejected  <FaQuestionCircle className="text-base" /></h1> : <>
-                                            {item.status === 'approved' ? <h1 className="text-green-500 ">Approved</h1> : <h1 className="flex items-center gap-1">Pending</h1>}
-                                        </>}
-                                    </td>
-                                    <th className="">
-                                        <div className="tooltip" data-tip="Update">
-                                            <Link to={`/updateArticle/${item._id}`}><p className="btn border-2 w-full btn-ghost px-0  text-center text-xl sm:text-3xl "><FaRegEdit /></p></Link>
-                                        </div>
-                                        <div className="tooltip" data-tip="Delete">
-                                            <p onClick={() => handleDelete(item._id)} className="btn border-2 w-full btn-ghost px-0 text-red-600 text-center text-xl sm:text-3xl "><FaTrashAlt /></p>
-                                        </div>
-                                    </th>
-                                </tr>)
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+                                            </td>
+                                            <td className="">
+                                                {item.isPremium === false ? <p className=" text-red-600 font-bold text-xl">No</p> : <p className=" text-green-600 font-bold text-xl">Yes</p>}
+                                            </td>
+                                            <td className="">
+                                                {formatDate(item.postedDate)}
+                                            </td>
+                                            <td className="font-bold">
+                                                {item.status === "rejected" ? <h1 className="text-red-500 font-bold flex items-center gap-1 cursor-pointer" onClick={() => handleShowRejectionReason(item.reason)}
+                                                >Rejected  <FaQuestionCircle className="text-base" /></h1> : <>
+                                                    {item.status === 'approved' ? <h1 className="text-green-500 ">Approved</h1> : <h1 className="flex items-center gap-1">Pending</h1>}
+                                                </>}
+                                            </td>
+                                            <th className="">
+                                                <div className="tooltip" data-tip="Update">
+                                                    <Link to={`/updateArticle/${item._id}`}><p className="btn border-2 w-full btn-ghost px-0  text-center text-xl sm:text-3xl "><FaRegEdit /></p></Link>
+                                                </div>
+                                                <div className="tooltip" data-tip="Delete">
+                                                    <p onClick={() => handleDelete(item._id)} className="btn border-2 w-full btn-ghost px-0 text-red-600 text-center text-xl sm:text-3xl "><FaTrashAlt /></p>
+                                                </div>
+                                            </th>
+                                        </tr>)
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
             }
 
             <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">

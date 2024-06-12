@@ -5,6 +5,7 @@ import ReactModal from "react-modal";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import CheckoutForm from "./CheckoutForm";
+import { Helmet } from "react-helmet-async";
 
 ReactModal.setAppElement('#root');
 
@@ -16,9 +17,9 @@ const Subscription = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const subscriptionOptions = [
-        { value: 1 / (24 * 60), label: '1 Minute - $1', price: 1 }, 
+        { value: 1 / (24 * 60), label: '1 Minute - $1', price: 1 },
         { value: 5, label: '5 Days - $10', price: 10 },
-        { value: 10, label: '10 Days - $20', price: 20 }, 
+        { value: 10, label: '10 Days - $20', price: 20 },
     ];
 
     const handleSubscriptionChange = (option) => {
@@ -36,6 +37,9 @@ const Subscription = () => {
 
     return (
         <div className="w-11/12 max-w-screen-xl mx-auto ">
+            <Helmet>
+                <title>DailyPulse | Subscription</title>
+            </Helmet>
             <div className="banner relative rounded-xl overflow-clip">
                 <img src={bannerImg} alt="Banner" className="w-full h-64 object-fill" />
                 <div className="absolute top-0 left-0 w-full h-full flex items-center flex-col justify-center">

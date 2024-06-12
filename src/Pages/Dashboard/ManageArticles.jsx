@@ -8,12 +8,13 @@ import Swal from "sweetalert2";
 import ReactPaginate from "react-paginate";
 import useAllArticles from "../../hooks/useAllArticles";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const ManageArticles = () => {
     const axiosSecure = useAxiosSecure()
     const [currentPage, setCurrentPage] = useState(1);
 
-    const { articles, totalArticles, totalPages,refetch } = useAllArticles(currentPage);
+    const { articles, totalArticles, totalPages, refetch } = useAllArticles(currentPage);
 
     const handlePageClick = (event) => {
         setCurrentPage(event.selected + 1);
@@ -117,7 +118,7 @@ const ManageArticles = () => {
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",            
+            cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
@@ -138,14 +139,14 @@ const ManageArticles = () => {
     }
 
 
-    const handleMakItEditor = (id) =>{
+    const handleMakItEditor = (id) => {
         Swal.fire({
             title: "Are you sure?",
             text: "You want to make it editor Choice !",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",            
+            cancelButtonColor: "#d33",
             confirmButtonText: "Yes, make it!"
         }).then((result) => {
             if (result.isConfirmed) {
@@ -163,16 +164,16 @@ const ManageArticles = () => {
                     })
             }
         });
-        
+
     }
-    const handleRemoveEditor = (id) =>{
+    const handleRemoveEditor = (id) => {
         Swal.fire({
             title: "Are you sure?",
             text: "You want to Remove it editor Choice !",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",            
+            cancelButtonColor: "#d33",
             confirmButtonText: "Yes, make it!"
         }).then((result) => {
             if (result.isConfirmed) {
@@ -190,12 +191,15 @@ const ManageArticles = () => {
                     })
             }
         });
-        
+
     }
 
 
     return (
         <div className="max-w-screen-xl w-11/12 mx-auto ">
+            <Helmet>
+                <title>DailyPulse | Manage Articles</title>
+            </Helmet>
             <SectionTitle heading={"All Articles"} subHeading={'Manege all of the Articles'}></SectionTitle>
             <div className="shadow-2xl p-5 rounded-md mb-10 ">
                 <div className="sm:text-2xl  md:text-4xl my-6 font-bold cinzel text-center">
@@ -250,7 +254,7 @@ const ManageArticles = () => {
                                         </div>
                                     </td>
                                     <td className="">
-                                        {item.editorPick === true ?  <h1 onClick={() => handleRemoveEditor(item._id)} className="btn text-green-500">Yes</h1> : <h1 onClick={() => handleMakItEditor(item._id)} className="btn text-red-500">No</h1>}
+                                        {item.editorPick === true ? <h1 onClick={() => handleRemoveEditor(item._id)} className="btn text-green-500">Yes</h1> : <h1 onClick={() => handleMakItEditor(item._id)} className="btn text-red-500">No</h1>}
                                     </td>
                                     <td className="">
                                         {item.isPremium === false ? <p onClick={() => handlePremium(item._id)} className="btn text-red-600 font-bold text-xl">No</p> : <p className="text-center text-green-600 font-bold text-xl">Yes</p>}
@@ -280,28 +284,28 @@ const ManageArticles = () => {
                     </table>
                 </div>
                 <div className="flex justify-center mt-4">
-                            <ReactPaginate
-                                previousLabel={'Previous'}
-                                nextLabel={'Next'}
-                                breakLabel={'...'}
-                                breakClassName={'break-me'}
-                                pageCount={totalPages}
-                                marginPagesDisplayed={2}
-                                pageRangeDisplayed={5}
-                                onPageChange={handlePageClick}
-                                containerClassName={'pagination'}
-                                subContainerClassName={'pages pagination'}
-                                activeClassName={'active'}
-                                pageClassName={'page-item'}
-                                pageLinkClassName={'page-link'}
-                                previousClassName={'page-item'}
-                                previousLinkClassName={'page-link'}
-                                nextClassName={'page-item'}
-                                nextLinkClassName={'page-link'}
-                                breakLinkClassName={'page-link'}
-                                activeLinkClassName={'active'}
-                            />
-                        </div>
+                    <ReactPaginate
+                        previousLabel={'Previous'}
+                        nextLabel={'Next'}
+                        breakLabel={'...'}
+                        breakClassName={'break-me'}
+                        pageCount={totalPages}
+                        marginPagesDisplayed={2}
+                        pageRangeDisplayed={5}
+                        onPageChange={handlePageClick}
+                        containerClassName={'pagination'}
+                        subContainerClassName={'pages pagination'}
+                        activeClassName={'active'}
+                        pageClassName={'page-item'}
+                        pageLinkClassName={'page-link'}
+                        previousClassName={'page-item'}
+                        previousLinkClassName={'page-link'}
+                        nextClassName={'page-item'}
+                        nextLinkClassName={'page-link'}
+                        breakLinkClassName={'page-link'}
+                        activeLinkClassName={'active'}
+                    />
+                </div>
             </div>
         </div>
     );

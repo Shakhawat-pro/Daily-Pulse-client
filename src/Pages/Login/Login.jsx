@@ -6,9 +6,10 @@ import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { AuthContext } from "../../Context/AuthProvider";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
-    const {signInUser} = useContext(AuthContext)
+    const { signInUser } = useContext(AuthContext)
     const navigate = useNavigate()
     const location = useLocation()
     const { register, handleSubmit, formState: { errors }, } = useForm();
@@ -16,31 +17,34 @@ const Login = () => {
     const onSubmit = async (data) => {
         console.log(data.email, data.password);
         signInUser(data.email, data.password)
-        .then(() => {
-            Swal.fire({
-                icon: 'success',
-                title: 'Login Successful',
-            }).then(() =>{
-                // navigate('/');
-                
-                {
-                    location.state? navigate(location.state) : navigate('/')
-                }
+            .then(() => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Login Successful',
+                }).then(() => {
+                    // navigate('/');
+
+                    {
+                        location.state ? navigate(location.state) : navigate('/')
+                    }
+                })
+
             })
-            
-        })
-        .catch(error => {
-            Swal.fire({
-                icon: 'error',
-                title: 'Login Failed',
-                text: 'Please check your email and password and try again.',
-                footer: `<span style="color: red;">${error.message}</span>`
-            });
-        })
+            .catch(error => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Login Failed',
+                    text: 'Please check your email and password and try again.',
+                    footer: `<span style="color: red;">${error.message}</span>`
+                });
+            })
     }
 
     return (
         <div className="sm:h-[600px] w-11/12 max-w-screen-lg mx-auto shadow-2xl flex flex-col  sm:flex-row-reverse items-center " >
+            <Helmet>
+                <title>DailyPulse | Login</title>
+            </Helmet>
             <div className="bg-black h-full sm:w-1/2 flex flex-col justify-center items-center max-sm:py-5" >
                 <h1 className="text-white font-bold font-serif text-4xl">Welcome Back!</h1>
                 <Lottie animationData={welcome} loop={true} />;

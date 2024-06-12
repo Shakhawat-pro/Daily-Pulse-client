@@ -10,6 +10,7 @@ import { AuthContext } from "../../Context/AuthProvider";
 import { updateProfile } from "firebase/auth";
 import LoadingModal from "../../components/LoadingModal ";
 import axios from "axios";
+import { Helmet } from "react-helmet-async";
 <label htmlFor="my_modal_6" className="btn">open modal</label>
 
 
@@ -92,6 +93,9 @@ const Register = () => {
 
     return (
         <div className="sm:h-[700px] w-11/12 max-w-screen-lg mx-auto shadow-2xl flex flex-col  sm:flex-row items-center " >
+            <Helmet>
+                <title>DailyPulse | Register</title>
+            </Helmet>
             <div className="bg-black h-full sm:w-1/2 flex flex-col justify-center  items-center " >
                 <h1 className="text-white font-bold font-serif text-4xl max-sm:my-5">Join Us Today!</h1>
                 <Lottie animationData={welcome} loop={true} />;

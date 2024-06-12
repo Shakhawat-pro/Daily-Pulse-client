@@ -2,6 +2,7 @@ import { FaRegUser } from "react-icons/fa";
 import usePremiumArticles from "../../hooks/usePremiumArticles";
 import premiumImg from "../../assets/premium.png"
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const PremiumArticles = () => {
     const [premiumArticles, isLoading] = usePremiumArticles()
@@ -19,6 +20,9 @@ const PremiumArticles = () => {
 
     return (
         <div className="w-11/12 max-w-screen-xl mx-auto">
+            <Helmet>
+                <title>DailyPulse | Premium Articles</title>
+            </Helmet>
             <h1 className="text-3xl text-center font-bold my-1">Premium Articles</h1>
             <p className="text-center">Enjoy your times while reading</p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-auto gap-10">

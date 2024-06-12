@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const SoloArticle = () => {
     const param = useParams()
@@ -20,6 +21,9 @@ const SoloArticle = () => {
     }
     return (
         <div className="w-11/12 max-w-screen-lg mx-auto border-2 border-black p-5 min-[350px]:p-10 rounded-lg ">
+            <Helmet>
+                <title>DailyPulse | {soloArticle.title}</title>
+            </Helmet>
             <div>
                 <img className="rounded-lg" src={soloArticle.image} alt="" />
             </div>
