@@ -49,7 +49,7 @@ const TrendingArticle = () => {
     }
 
     if (isLoading) {
-        return <div className="w-fit mx-auto"><span className="loading loading-spinner  w-20 text-info"></span></div>;
+        return <div className="w-fit mx-auto min-h-screen flex justify-center items-center"><span className="loading loading-spinner  w-20 text-info"></span></div>;
     }
 
     const formatDate = (dateString) => {
