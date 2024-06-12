@@ -1,0 +1,125 @@
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.keen-slider{
+  height: 420px;
+}
+
+[class^="number-slide"],
+[class*=" number-slide"] {
+  background: grey;
+  display: flex;
+  align-items: end;
+  justify-content: start;
+  color: #fff;
+  height: 300px;
+  max-height: 100vh;
+}
+
+.navigation-wrapper {
+  position: relative;
+}
+
+.number-slide1 h4 {
+  width: fit-content;
+  padding: 4px 10px;
+  background: rgb(64, 175, 255);
+  background: linear-gradient(128deg,
+      rgba(64, 175, 255, 1) 0%,
+      rgba(63, 97, 255, 1) 100%);
+}
+
+.number-slide2 h4 {
+  width: fit-content;
+  padding: 4px 10px;
+  background: rgb(255, 75, 64);
+  background: linear-gradient(128deg,
+      rgba(255, 154, 63, 1) 0%,
+      rgba(255, 75, 64, 1) 100%);
+}
+
+.number-slide3 h4 {
+  width: fit-content;
+  padding: 4px 10px;
+  background: rgb(182, 255, 64);
+  background: linear-gradient(128deg,
+      rgba(182, 255, 64, 1) 0%,
+      rgba(63, 255, 71, 1) 100%);
+  background: linear-gradient(128deg,
+      rgba(189, 255, 83, 1) 0%,
+      rgba(43, 250, 82, 1) 100%);
+}
+
+.number-slide4 h4 {
+  width: fit-content;
+  padding: 4px 10px;
+  background: rgb(64, 255, 242);
+  background: linear-gradient(128deg,
+      rgba(64, 255, 242, 1) 0%,
+      rgba(63, 188, 255, 1) 100%);
+}
+
+.number-slide5 h4 {
+  width: fit-content;
+  padding: 4px 10px;
+  background: rgb(255, 64, 156);
+  background: linear-gradient(128deg,
+      rgba(255, 64, 156, 1) 0%,
+      rgba(255, 63, 63, 1) 100%);
+}
+
+.number-slide6 h4 {
+  width: fit-content;
+  padding: 4px 10px;
+  background: rgb(64, 76, 255);
+  background: linear-gradient(128deg,
+      rgba(64, 76, 255, 1) 0%,
+      rgba(174, 63, 255, 1) 100%);
+}
+
+.number-slide1:hover{
+  border: 3px solid rgb(64, 175, 255);
+}
+.number-slide2:hover{
+  border: 3px solid rgb(255, 75, 64);
+}
+.number-slide3:hover{
+  border: 3px solid rgb(182, 255, 64);
+}
+.number-slide4:hover{
+  border: 3px solid rgb(64, 255, 242);
+}
+.number-slide5:hover{
+  border: 3px solid rgb(255, 64, 156);
+}
+.number-slide6:hover{
+  border: 3px solid rgb(64, 76, 255);
+}
+
+
+.arrow {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  fill: #0061ff;
+  cursor: pointer;
+}
+
+.arrow--left {
+  left: 5px;
+}
+
+.arrow--right {
+  left: auto;
+  right: 5px;
+}
+
+.arrow--disabled {
+  fill: rgba(255, 255, 255, 0.5);
+}

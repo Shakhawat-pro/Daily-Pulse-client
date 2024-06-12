@@ -1,8 +1,14 @@
+import BarChart from "./Chart/BarChart";
+import LineChart from "./Chart/LineChart";
+import PieChart from "./Chart/PieChart";
 
 const AdminHome = () => {
     return (
-        <div>
-            asdfsafsdafsffafsfsafsfsasafsdsfsdaaaaaaaaaaaaa
+        <div className="w-11/12 mx-auto my-16">
+            <h1 className="text-4xl font-bold font-serif text-center">Statistics</h1>
+            <PieChart></PieChart>         
+            <BarChart></BarChart>   
+            <LineChart></LineChart>
         </div>
     );
 };

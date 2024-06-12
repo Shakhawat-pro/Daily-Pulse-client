@@ -1,23 +1,23 @@
 import useAxiosSecure from "./useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 
-const useUsers = (page = 1, limit = 5) => {
+const useAllArticles = (page = 1, limit = 10) => {
     const axiosSecure = useAxiosSecure();
 
-    const fetchUsers = async () => {
-        const res = await axiosSecure.get(`/users?page=${page}&limit=${limit}`);
+    const fetchArticles = async () => {
+        const res = await axiosSecure.get(`/allArticles?page=${page}&limit=${limit}`);
         return res.data;
     };
 
     const { data, isLoading, refetch } = useQuery({
-        queryKey: ['users', page, limit],
-        queryFn: fetchUsers,
+        queryKey: ['allArticles', page, limit],
+        queryFn: fetchArticles,
         keepPreviousData: true
     });
 
     return {
-        users: data?.users || [],
-        totalUsers: data?.totalUsers || 0,
+        articles: data?.articles || [],
+        totalArticles: data?.totalArticles || 0,
         totalPages: data?.totalPages || 0,
         currentPage: data?.currentPage || 1,
         isLoading,
@@ -25,4 +25,4 @@ const useUsers = (page = 1, limit = 5) => {
     };
 };
 
-export default useUsers;
+export default useAllArticles;

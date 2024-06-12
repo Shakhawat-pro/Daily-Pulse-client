@@ -4,12 +4,19 @@ import useUsers from "../../hooks/useUsers";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { GrUserAdmin } from "react-icons/gr";
-
+import ReactPaginate from 'react-paginate';
+import { useState } from "react";
+import './page.css'
 
 const AllUsers = () => {
-    const [users, , refetch] = useUsers()
-    const axiosSecure = useAxiosSecure()
+    const [currentPage, setCurrentPage] = useState(1);
+    const { users, totalUsers, totalPages, isLoading, refetch } = useUsers(currentPage);
+    const axiosSecure = useAxiosSecure();
     console.log(users);
+
+    const handlePageClick = (event) => {
+        setCurrentPage(event.selected + 1);
+    };
 
     const handleDelete = (id) => {
         Swal.fire({
@@ -22,7 +29,6 @@ const AllUsers = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-
                 axiosSecure.delete(`/users/${id}`)
                     .then(res => {
                         if (res.data.deletedCount > 0) {
@@ -33,11 +39,10 @@ const AllUsers = () => {
                                 icon: "success"
                             });
                         }
-                    })
+                    });
             }
         });
-    }
-
+    };
 
     const handleMakeAdmin = (item) => {
         Swal.fire({
@@ -53,7 +58,7 @@ const AllUsers = () => {
                 axiosSecure.patch(`/users/admin/${item._id}`)
                     .then(res => {
                         if (res.data.modifiedCount > 0) {
-                            refetch()
+                            refetch();
                             Swal.fire({
                                 title: "Success!",
                                 text: "Role has been changed to Admin.",
@@ -94,7 +99,7 @@ const AllUsers = () => {
                 axiosSecure.patch(`/users/guest/${item._id}`)
                     .then(res => {
                         if (res.data.modifiedCount > 0) {
-                            refetch()
+                            refetch();
                             Swal.fire({
                                 title: "Success!",
                                 text: "Role has been changed to Guest.",
@@ -123,68 +128,110 @@ const AllUsers = () => {
 
     return (
         <div className="max-w-screen-xl w-10/12 mx-auto ">
-            <SectionTitle heading={"All users"} subHeading={'Manege all of your users'}></SectionTitle>
+            <SectionTitle heading={"All users"} subHeading={'Manage all of your users'}></SectionTitle>
             <div className="shadow-2xl p-5 rounded-md mb-10 ">
                 <div className="sm:text-2xl  md:text-4xl my-6 font-bold cinzel text-center">
                     <div className="space-y-2 ">
-                        <h2>Total Users: {users.length} </h2>
+                        <h2>Total Users: {totalUsers} </h2>
                     </div>
                 </div>
-                <div className="overflow-x-auto rounded-t-lg ">
-                    <table className="table">
-                        <thead>
-                            <tr className=" bg-black text-white uppercase inter ">
-                                <th></th>
-                                <th>Name</th>
-                                <th>Premium</th>
-                                <th>Role</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                users.map((item, index) => <tr key={item._id}>
-                                    <th>
-                                        {index + 1}
-                                    </th>
-                                    <td className="">
-                                        <div className="flex items-center gap-3">
-                                            <div className="avatar">
-                                                <div className="mask mask-squircle w-12 h-12">
-                                                    <img className="object-top" src={item.profilePicture} alt="Avatar Tailwind CSS Component" />
+                {isLoading ? (
+                    <p>Loading...</p>
+                ) : (
+                    <div>
+                        <div className="overflow-x-auto rounded-t-lg ">
+                            <table className="table">
+                                <thead>
+                                    <tr className=" bg-black text-white uppercase inter ">
+                                        <th></th>
+                                        <th>Name</th>
+                                        <th>Premium</th>
+                                        <th>Role</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {users.map((item, index) => (
+                                        <tr key={item._id}>
+                                            <th>{index + 1}</th>
+                                            <td className="">
+                                                <div className="flex items-center gap-3">
+                                                    <div className="avatar">
+                                                        <div className="mask mask-squircle w-12 h-12">
+                                                            <img className="object-top" src={item.profilePicture} alt="Avatar Tailwind CSS Component" />
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <div className="font-bold">{item.name}</div>
+                                                        <div className="text-sm opacity-50">{item.email}</div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div>
-                                                <div className="font-bold">{item.name}</div>
-                                                <div className="text-sm opacity-50">{item.email}</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td className="">
-                                        {item.premiumTaken === null ? <p className="text-red-600 font-bold text-xl">No</p> : <p className="text-green-600 font-bold text-xl">Yes</p>}
-                                    </td>
-                                    <td>
-                                        {item.role === 'admin' ?
-                                            <button
-                                                onClick={() => handleRemoveAdmin(item)}
-                                                className="btn  bg-green-500 tooltip " data-tip='Admin'>
-                                                <GrUserAdmin className="text-white text-2xl "></GrUserAdmin>
-                                            </button>
+                                            </td>
+                                            <td className="">
+                                                {item.premiumTaken === null ? (
+                                                    <p className="text-red-600 font-bold text-xl">No</p>
+                                                ) : (
+                                                    <p className="text-green-600 font-bold text-xl">Yes</p>
+                                                )}
+                                            </td>
+                                            <td>
+                                                {item.role === 'admin' ? (
+                                                    <button
+                                                        onClick={() => handleRemoveAdmin(item)}
+                                                        className="btn  bg-green-500 tooltip"
+                                                        data-tip="Admin"
+                                                    >
+                                                        <GrUserAdmin className="text-white text-2xl" />
+                                                    </button>
+                                                ) : (
+                                                    <button
+                                                        onClick={() => handleMakeAdmin(item)}
+                                                        className="btn  bg-orange-500 tooltip"
+                                                        data-tip="Guest user"
+                                                    >
+                                                        <FaUsers className="text-white text-2xl" />
+                                                    </button>
+                                                )}
+                                            </td>
+                                            <th>
+                                                <button
+                                                    onClick={() => handleDelete(item._id)}
+                                                    className="btn border-2 w-full btn-ghost px-0 text-red-600 text-center text-xl sm:text-3xl "
+                                                >
+                                                    <FaTrashAlt />
+                                                </button>
+                                            </th>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div className="flex justify-center mt-4">
+                            <ReactPaginate
+                                previousLabel={'Previous'}
+                                nextLabel={'Next'}
+                                breakLabel={'...'}
+                                breakClassName={'break-me'}
+                                pageCount={totalPages}
+                                marginPagesDisplayed={2}
+                                pageRangeDisplayed={5}
+                                onPageChange={handlePageClick}
+                                containerClassName={'pagination'}
+                                subContainerClassName={'pages pagination'}
+                                activeClassName={'active'}
+                                pageClassName={'page-item'}
+                                pageLinkClassName={'page-link'}
+                                previousClassName={'page-item'}
+                                previousLinkClassName={'page-link'}
+                                nextClassName={'page-item'}
+                                nextLinkClassName={'page-link'}
+                                breakLinkClassName={'page-link'}
+                                activeLinkClassName={'active'}
 
-                                            : <button
-                                                onClick={() => handleMakeAdmin(item)}
-                                                className="btn  bg-orange-500 tooltip" data-tip='Guest user'>
-                                                <FaUsers className="text-white text-2xl"></FaUsers>
-                                            </button>}
-                                    </td>
-                                    <th>
-                                        <button onClick={() => handleDelete(item._id)} className="btn border-2 w-full btn-ghost px-0 text-red-600 text-center text-xl sm:text-3xl "><FaTrashAlt /></button>
-                                    </th>
-                                </tr>)
-                            }
-                        </tbody>
-                    </table>
-                </div>
+                            />
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );

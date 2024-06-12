@@ -9,6 +9,8 @@ import { AuthContext } from "../../../Context/AuthProvider";
 import PriceCard from "../PriceCard";
 import UserCount from "../TrendingArticle/UserCount";
 import Publishers from "../Publishers/Publishers";
+import EditorPick from "../EditorPicks/EditorPick";
+import NewsLetter from "../NewsLetter";
 
 
 
@@ -59,9 +61,11 @@ const Home = () => {
                     <button className="btn bg-black text-white" onClick={handleSubscribeClick}>Subscribe Now</button>
                 </div>
             </ReactModal>
-            <Publishers></Publishers>
             <PriceCard></PriceCard>
             <UserCount></UserCount>
+            <Publishers></Publishers>
+            <EditorPick></EditorPick>
+            <NewsLetter></NewsLetter>
         </div>
     );
 };
